@@ -4,7 +4,8 @@
     "type": "prestashop-module",
     "autoload": {
         "psr-4": {
-            "Lollilop\\": "src/"
+            "Lollilop\\": "src/",
+            "MyModule\\Controller\\": "src/Controller/"
         }
     },
     "authors": [

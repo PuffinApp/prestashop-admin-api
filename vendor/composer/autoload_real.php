@@ -22,7 +22,7 @@ class ComposerAutoloaderInita8c89bd607863da3c5cce5e3587fddc4
             return self::$loader;
         }
 
-        spl_autoload_register(array('ComposerAutoloaderInita8c89bd607863da3c5cce5e3587fddc4', 'loadClassLoader'), true, true);
+        spl_autoload_register(array('ComposerAutoloaderInita8c89bd607863da3c5cce5e3587fddc4', 'loadClassLoader'), true, false);
         self::$loader = $loader = new \Composer\Autoload\ClassLoader(\dirname(\dirname(__FILE__)));
         spl_autoload_unregister(array('ComposerAutoloaderInita8c89bd607863da3c5cce5e3587fddc4', 'loadClassLoader'));
 
@@ -48,7 +48,7 @@ class ComposerAutoloaderInita8c89bd607863da3c5cce5e3587fddc4
             }
         }
 
-        $loader->register(true);
+        $loader->register(false);
 
         return $loader;
     }

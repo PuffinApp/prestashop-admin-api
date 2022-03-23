@@ -5,11 +5,12 @@ require dirname(__FILE__) . "/../../vendor/autoload.php";
 use Lollilop\Classes\Controller\RestController;
 
 // TODO: rename it in something else?
-// TODO: create a hook to make it for good?
 class LollilopDashboardModuleFrontController extends RestController
 {
     public function processGet() {
-        $module_name = Tools::getValue("module") ?? null;
+        $module_name = Tools::getValue("module_name") ?? null;
+
+        $id_shop = Tools::getValue("id_shop") ?? 1;
 
         // If specific name is given, it gets widget only from that module.
         $params = [
@@ -26,8 +27,26 @@ class LollilopDashboardModuleFrontController extends RestController
             $id_shop
         );
 
-        die(
-            json_encode($modules_widgets)
+        $widgets = $this->removeEmptyWidgets(
+            $modules_widgets
         );
-    } 
+
+        die(
+            json_encode(
+                array_values($widgets),
+                0,
+                1
+            )
+        );
+    }
+
+    private function removeEmptyWidgets($widgets) {
+        return array_filter(
+            $widgets,
+            function($widget, $key) {
+                return !is_null($widget) && $widget !== '' && $widget !== "{}";
+            },
+            1
+        );
+    }
 }

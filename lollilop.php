@@ -39,6 +39,7 @@ class Lollilop extends Module
         $this->version = '1.0.0';
         $this->author = 'Agostino Fiscale';
         $this->need_instance = 0;
+        
 
         /**
          * Set $this->bootstrap to true if your module is compliant with bootstrap (PrestaShop 1.6)
@@ -50,7 +51,7 @@ class Lollilop extends Module
         $this->displayName = $this->l('Lollilop');
         $this->description = $this->l('Lollilop let you manage your shop from your phone');
 
-        $this->ps_versions_compliancy = array('min' => '1.6', 'max' => _PS_VERSION_);
+        $this->ps_versions_compliancy = array('min' => '1.7', 'max' => _PS_VERSION_);
     }
 
     /**
@@ -62,6 +63,9 @@ class Lollilop extends Module
         Configuration::updateValue('LOLLILOP_LIVE_MODE', false);
 
         include(dirname(__FILE__).'/sql/install.php');
+
+        // Register hooks for overrides
+        $this->registerOverrideHooks();
 
         return parent::install() &&
             $this->registerHook('header') &&
@@ -75,7 +79,40 @@ class Lollilop extends Module
 
         include(dirname(__FILE__).'/sql/uninstall.php');
 
-        return parent::uninstall();
+        // Unregister hooks for overrides
+        $this->unregisterOverrideHooks();
+
+        return parent::uninstall() &&
+            $this->registerHook('header') &&
+            $this->registerHook('backOfficeHeader') &&
+            $this->registerHook('moduleRoutes');
+    }
+
+    public function registerOverrideHooks() {
+        foreach ($this->getOverridedModules() as $module) {
+            $module->registerHook('widgetCards');
+        }
+    }
+
+    public function unregisterOverrideHooks() {
+        foreach ($this->getOverridedModules() as $module) {
+            $module->unregisterHook('widgetCards');
+        }
+    }
+
+    public function getOverridedModules() {
+        $modules = [];
+
+        foreach($this->getOverrides() as $override) {
+            // Check if it is a module
+            $module = Module::getInstanceByName($override);
+
+            if ($module) {
+                $modules[] = $module;
+            }
+        } 
+
+        return $modules;
     }
 
     /**
@@ -224,6 +261,15 @@ class Lollilop extends Module
     public function hookModuleRoutes()
     {
         return [
+            'module-lollilop-apiauth' => [
+                'rule' => 'lollilopapi/auth',
+                'keywords' => [],
+                'controller' => 'auth',
+                'params' => [
+                    'fc' => 'module',
+                    'module' => 'lollilop'
+                ] 
+            ],
             'module-lollilop-apidashboard' => [
                 'rule' => 'lollilopapi/dashboard{/:module}',
                 'keywords' => [
@@ -255,7 +301,7 @@ class Lollilop extends Module
                     'fc' => 'module',
                     'module' => 'lollilop'
                 ] 
-            ] 
+            ]
         ];
     }
 }

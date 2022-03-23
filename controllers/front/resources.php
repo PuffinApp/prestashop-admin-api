@@ -9,22 +9,20 @@ class LollilopResourcesModuleFrontController extends RestController
     private $resource_controller = null;
 
     public function run() {
+        $resource_controllers = Dispatcher::getControllersInDirectory(dirname(__FILE__) . "/resource_controllers/");
+
         $resource_name = $_GET["resource"];
-        $resource_name_capitalized = ucfirst(strtolower($resource_name));
+		$resource_name_lower = strtolower($resource_name);
 
-        $resource_controller_name =  $resource_name_capitalized . "Controller";
+        if (array_key_exists($resource_name_lower, $resource_controllers)) {
+					$resource_controller_name = $resource_controllers[$resource_name_lower];
+			        $resource_controller_file = dirname(__FILE__) . "/resource_controllers/" . $resource_controller_name . ".php";
 
-        $resource_controller_file = dirname(__FILE__) . "/resource_controllers/" .  $resource_name_capitalized . "Controller.php";
-
-        if (file_exists($resource_controller_file)) {
             require_once $resource_controller_file;
 
             $this->resource_controller = new $resource_controller_name();
-        }
-
-        if (is_null($this->resource_controller)) {
-            // Resource does not exist, should it return a 404?
-            return;
+        } else {
+            $this->return404();
         }
         
         parent::run();
@@ -35,14 +33,14 @@ class LollilopResourcesModuleFrontController extends RestController
     }
 
     public function processPost() {
-        $this->resource_controller->processGet();
+        $this->resource_controller->processPost();
     }
 
     public function processPut() {
-        $this->resource_controller->processGet();
+        $this->resource_controller->processPut();
     }
 
     public function processDelete() {
-        $this->resource_controller->processGet();
+        $this->resource_controller->processDelete();
     }
 }

@@ -7,6 +7,10 @@ namespace Composer\Autoload;
 class ComposerStaticInita8c89bd607863da3c5cce5e3587fddc4
 {
     public static $prefixLengthsPsr4 = array (
+        'M' => 
+        array (
+            'MyModule\\Controller\\' => 20,
+        ),
         'L' => 
         array (
             'Lollilop\\' => 9,
@@ -14,6 +18,10 @@ class ComposerStaticInita8c89bd607863da3c5cce5e3587fddc4
     );
 
     public static $prefixDirsPsr4 = array (
+        'MyModule\\Controller\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Controller',
+        ),
         'Lollilop\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
@@ -23,6 +31,7 @@ class ComposerStaticInita8c89bd607863da3c5cce5e3587fddc4
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Lollilop\\Classes\\Controller\\RestController' => __DIR__ . '/../..' . '/src/Classes/Controller/RestController.php',
+        'MyModule\\Controller\\DemoController' => __DIR__ . '/../..' . '/src/Controller/DemoController.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

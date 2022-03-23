@@ -6,5 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'MyModule\\Controller\\' => array($baseDir . '/src/Controller'),
     'Lollilop\\' => array($baseDir . '/src'),
 );

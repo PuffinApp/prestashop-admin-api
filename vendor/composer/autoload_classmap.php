@@ -8,4 +8,5 @@ $baseDir = dirname($vendorDir);
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'Lollilop\\Classes\\Controller\\RestController' => $baseDir . '/src/Classes/Controller/RestController.php',
+    'MyModule\\Controller\\DemoController' => $baseDir . '/src/Controller/DemoController.php',
 );
