@@ -1,4 +1,3 @@
-
 # Prestashop Backoffice Rest API
 
 This is a module for [PrestaShop](https://www.prestashop.com). 
