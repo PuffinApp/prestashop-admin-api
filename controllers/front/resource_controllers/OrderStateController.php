@@ -14,8 +14,10 @@ class OrderStateController extends RestController {
             $response = OrderState::getOrderStates($this->id_lang);
         }
 
-        $response_json = json_encode($response);
-
-        $this->ajaxRender($response_json);
+        $this->success(
+            "OK",
+            "200",
+            $response
+        );
     }
 }

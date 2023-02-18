@@ -28,7 +28,7 @@ class OrderController extends RestController
             $order = new Order($id_resource);
 
             if ($order->id == null)
-                $this->return404();
+                $this->error("", 404, "Resource not found");
 
             // Look: getProductsDetail() in Order.php as alternative
             $order->order_details = $order->getOrderDetailList();
@@ -79,9 +79,11 @@ class OrderController extends RestController
             $response = $orderGrid->getData()->getRecords()->all();
         }
 
-        $response_json = json_encode($response);
-
-        $this->ajaxRender($response_json);
+        $this->success(
+            "OK",
+            "200",
+            $response
+        );
     }
 
     function extractFilters($filters)

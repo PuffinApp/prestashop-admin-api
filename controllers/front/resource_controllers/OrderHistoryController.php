@@ -16,7 +16,7 @@ class OrderHistoryController extends RestController {
         $order = new Order($id_order);
 
         if ($order->id == null)
-            $this->return404();
+            $this->error("", 404, "Resource not found");
 
         // Check for id_order_state too
 

@@ -11,8 +11,10 @@ class Ps_borestNotificationsModuleFrontController extends RestController
 
         $notifications = $notification_obj->getAll();
 
-        $notification_json = json_encode($notifications);
-
-        $this->ajaxRender($notification_json);
+        $this->success(
+            "OK",
+            200,
+            $notifications
+        );
     }
 }

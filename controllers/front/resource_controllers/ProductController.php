@@ -32,7 +32,7 @@ class ProductController extends RestController {
                                 true);
 
             if ($productObj->id == null) 
-                $this->return404();
+                $this->error("", 404, "Resource not found");
             
             $modelMapper = $this->get('prestashop.adapter.admin.model.product');
 
@@ -85,9 +85,11 @@ class ProductController extends RestController {
             $response = $products;
         }
 
-        $response_json = json_encode($response);
-
-        $this->return200($response_json);
+        $this->success(
+            "OK",
+            200,
+            $response
+        );
     }
 
     /**

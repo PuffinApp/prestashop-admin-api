@@ -16,9 +16,11 @@ class ManufacturerController extends RestController {
             $response =  Manufacturer::getManufacturers(false, (int) $this->context->language->id, true, false, false, false, true);
         }
 
-        $response_json = json_encode($response);
-
-        $this->ajaxRender($response_json);
+        $this->success(
+            "OK",
+            "200",
+            $response
+        );
     }
 
 }

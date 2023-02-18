@@ -60,7 +60,7 @@ class Ps_borest extends Module
      */
     public function install()
     {
-        Configuration::updateValue('LOLLILOP_LIVE_MODE', false);
+        Configuration::updateValue('PS_BOREST_LIVE_MODE', false);
 
         include(dirname(__FILE__).'/sql/install.php');
 
@@ -75,7 +75,7 @@ class Ps_borest extends Module
 
     public function uninstall()
     {
-        Configuration::deleteByName('LOLLILOP_LIVE_MODE');
+        Configuration::deleteByName('PS_BOREST_LIVE_MODE');
 
         include(dirname(__FILE__).'/sql/uninstall.php');
 
@@ -177,7 +177,7 @@ class Ps_borest extends Module
                     array(
                         'type' => 'switch',
                         'label' => $this->l('Live mode'),
-                        'name' => 'LOLLILOP_LIVE_MODE',
+                        'name' => 'PS_BOREST_LIVE_MODE',
                         'is_bool' => true,
                         'desc' => $this->l('Use this module in live mode'),
                         'values' => array(
@@ -198,12 +198,12 @@ class Ps_borest extends Module
                         'type' => 'text',
                         'prefix' => '<i class="icon icon-envelope"></i>',
                         'desc' => $this->l('Enter a valid email address'),
-                        'name' => 'LOLLILOP_ACCOUNT_EMAIL',
+                        'name' => 'PS_BOREST_ACCOUNT_EMAIL',
                         'label' => $this->l('Email'),
                     ),
                     array(
                         'type' => 'password',
-                        'name' => 'LOLLILOP_ACCOUNT_PASSWORD',
+                        'name' => 'PS_BOREST_ACCOUNT_PASSWORD',
                         'label' => $this->l('Password'),
                     ),
                 ),
@@ -220,9 +220,9 @@ class Ps_borest extends Module
     protected function getConfigFormValues()
     {
         return array(
-            'LOLLILOP_LIVE_MODE' => Configuration::get('LOLLILOP_LIVE_MODE', true),
-            'LOLLILOP_ACCOUNT_EMAIL' => Configuration::get('LOLLILOP_ACCOUNT_EMAIL', 'contact@prestashop.com'),
-            'LOLLILOP_ACCOUNT_PASSWORD' => Configuration::get('LOLLILOP_ACCOUNT_PASSWORD', null),
+            'PS_BOREST_LIVE_MODE' => Configuration::get('PS_BOREST_LIVE_MODE', true),
+            'PS_BOREST_ACCOUNT_EMAIL' => Configuration::get('PS_BOREST_ACCOUNT_EMAIL', 'contact@prestashop.com'),
+            'PS_BOREST_ACCOUNT_PASSWORD' => Configuration::get('PS_BOREST_ACCOUNT_PASSWORD', null),
         );
     }
 

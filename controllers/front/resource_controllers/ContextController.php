@@ -29,9 +29,11 @@ class ContextController extends RestController
         }
         
 
-        $response_json = json_encode($response);
-
-        $this->ajaxRender($response_json);
+        $this->success(
+            "OK",
+            "200",
+            $response
+        );
     }
 
     private function cleanKeys($temp_shops) {

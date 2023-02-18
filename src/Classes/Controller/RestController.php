@@ -105,74 +105,58 @@ abstract class RestController extends \ModuleFrontController
         }
     }
 
-    public function return200($data = []) {
-        http_response_code(200); 
+    public function success(
+        $status,
+        $code,
+        $data
+    ) {
+        http_response_code($code);
 
+        $responseData = [
+            'status' => $status,
+            'code' => $code,
+            'data' => $data
+        ];
+        
         $this->ajaxRender(
             json_encode(
-                array(
-                    "success" => 1,
-                    "status" => 200,
-                    "data" => $data
-                )
+                $responseData
             )
         );
 
         die();
     }
 
-    // TODO: Move into helpers
-    public function return400($error = "Bad Request")
-    {
-        http_response_code(400);
+    public function error(
+        $status, 
+        $code, 
+        $errors
+    ) {
+        http_response_code($code);
+
+        if (is_string($errors)) {
+            $errors = [$errors];
+        }
+
+        $flatten = [];
+        array_walk_recursive($errors, function ($error) use (&$flatten) {
+            $flatten[] = $error;
+        });
+
+        $responseData = [
+            'status' => $status,
+            'code' => $code,
+            'errors' => $flatten,
+        ];
 
         $this->ajaxRender(
             json_encode(
-                array(
-                    "success" => 0,
-                    "code" => 400,
-                    "error" => $error
-                )
+                $responseData
             )
         );
 
         die();
     }
-
-    public function return404()
-    {
-        http_response_code(404);
-
-        $this->ajaxRender(
-            json_encode(
-                array(
-                    "success" => 0,
-                    "code" => 404,
-                    "error" => "Resource not found"
-                )
-            )
-        );
-
-        die();
-    }
-
-    public function return409()
-    {
-        http_response_code(409);
-
-        $this->ajaxRender(
-            json_encode(
-                array(
-                    "success" => 0,
-                    "code" => 409,
-                    "error" => "Conflict"
-                )
-            )
-        );
-
-        die();
-    }
-
     
 
     public function get($service)
@@ -195,16 +179,8 @@ abstract class RestController extends \ModuleFrontController
         return $json;
     }
 
-    protected function processGet()
-    {
-    }
-    protected function processPost()
-    {
-    }
-    protected function processPut()
-    {
-    }
-    protected function processDelete()
-    {
-    }
+    protected function processGet() {}
+    protected function processPost() {}
+    protected function processPut() {}
+    protected function processDelete() {}
 }
