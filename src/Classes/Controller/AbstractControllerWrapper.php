@@ -1,6 +1,6 @@
 <?php
 
-namespace Lollilop\Classes\Controller;
+namespace Ps_borest\Classes\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormBuilderInterface;

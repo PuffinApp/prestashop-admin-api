@@ -1,6 +1,6 @@
 <?php
 
-use Lollilop\Classes\Controller\RestController;
+use Ps_borest\Classes\Controller\RestController;
 use PrestaShop\PrestaShop\Core\Search\Filters\OrderFilters;
 
 class OrderController extends RestController

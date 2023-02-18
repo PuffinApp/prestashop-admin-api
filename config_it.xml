@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <module>
-    <name>lollilop</name>
-    <displayName><![CDATA[Lollilop]]></displayName>
+    <name>ps_borest</name>
+    <displayName><![CDATA[Ps_borest]]></displayName>
     <version><![CDATA[1.0.0]]></version>
-    <description><![CDATA[Lollilop let you manage your shop from your phone]]></description>
+    <description><![CDATA[Ps_borest let you manage your shop from your phone]]></description>
     <author><![CDATA[Agostino Fiscale]]></author>
     <tab><![CDATA[others]]></tab>
     <is_configurable>1</is_configurable>

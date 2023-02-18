@@ -1,7 +1,7 @@
 
 <?php
 
-use Lollilop\Classes\Controller\RestController;
+use Ps_borest\Classes\Controller\RestController;
 
 class ImageController extends RestController {
 

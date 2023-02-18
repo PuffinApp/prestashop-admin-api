@@ -1,6 +1,6 @@
 <?php
 
-namespace Lollilop\Classes\Controller;
+namespace Ps_borest\Classes\Controller;
 
 require_once _PS_ROOT_DIR_ . '/config/defines.inc.php';
 require_once _PS_ROOT_DIR_ . '/app/AppKernel.php';
@@ -105,20 +105,75 @@ abstract class RestController extends \ModuleFrontController
         }
     }
 
+    public function return200($data = []) {
+        http_response_code(200); 
+
+        $this->ajaxRender(
+            json_encode(
+                array(
+                    "success" => 1,
+                    "status" => 200,
+                    "data" => $data
+                )
+            )
+        );
+
+        die();
+    }
+
     // TODO: Move into helpers
+    public function return400($error = "Bad Request")
+    {
+        http_response_code(400);
+
+        $this->ajaxRender(
+            json_encode(
+                array(
+                    "success" => 0,
+                    "code" => 400,
+                    "error" => $error
+                )
+            )
+        );
+
+        die();
+    }
+
     public function return404()
     {
-        header("HTTP/1.0 404 Not Found");
+        http_response_code(404);
+
+        $this->ajaxRender(
+            json_encode(
+                array(
+                    "success" => 0,
+                    "code" => 404,
+                    "error" => "Resource not found"
+                )
+            )
+        );
 
         die();
     }
 
     public function return409()
     {
-        header("HTTP/1.0 409 Conflict");
+        http_response_code(409);
+
+        $this->ajaxRender(
+            json_encode(
+                array(
+                    "success" => 0,
+                    "code" => 409,
+                    "error" => "Conflict"
+                )
+            )
+        );
 
         die();
     }
+
+    
 
     public function get($service)
     {
@@ -131,7 +186,13 @@ abstract class RestController extends \ModuleFrontController
 
         // Check if json is correct and return some error if it isn't.
 
-        return json_decode($request_body, true) ?? [];
+        $json = json_decode($request_body, true);
+
+        if (!empty($request_body) && is_null($json)) {
+            $this->return400();
+        }
+
+        return $json;
     }
 
     protected function processGet()

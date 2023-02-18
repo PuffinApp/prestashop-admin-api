@@ -28,13 +28,13 @@ if (!defined('_PS_VERSION_')) {
     exit;
 }
 
-class Lollilop extends Module
+class Ps_borest extends Module
 {
     protected $config_form = false;
 
     public function __construct()
     {
-        $this->name = 'lollilop';
+        $this->name = 'ps_borest';
         $this->tab = 'others';
         $this->version = '1.0.0';
         $this->author = 'Agostino Fiscale';
@@ -48,8 +48,8 @@ class Lollilop extends Module
 
         parent::__construct();
 
-        $this->displayName = $this->l('Lollilop');
-        $this->description = $this->l('Lollilop let you manage your shop from your phone');
+        $this->displayName = $this->l('Ps_borest');
+        $this->description = $this->l('Ps_borest let you manage your shop from your phone');
 
         $this->ps_versions_compliancy = array('min' => '1.7', 'max' => _PS_VERSION_);
     }
@@ -123,7 +123,7 @@ class Lollilop extends Module
         /**
          * If values have been submitted in the form, process.
          */
-        if (((bool)Tools::isSubmit('submitLollilopModule')) == true) {
+        if (((bool)Tools::isSubmit('submitPs_borestModule')) == true) {
             $this->postProcess();
         }
 
@@ -148,7 +148,7 @@ class Lollilop extends Module
         $helper->allow_employee_form_lang = Configuration::get('PS_BO_ALLOW_EMPLOYEE_FORM_LANG', 0);
 
         $helper->identifier = $this->identifier;
-        $helper->submit_action = 'submitLollilopModule';
+        $helper->submit_action = 'submitPs_borestModule';
         $helper->currentIndex = $this->context->link->getAdminLink('AdminModules', false)
             .'&configure='.$this->name.'&tab_module='.$this->tab.'&module_name='.$this->name;
         $helper->token = Tools::getAdminTokenLite('AdminModules');
@@ -261,28 +261,28 @@ class Lollilop extends Module
     public function hookModuleRoutes()
     {
         return [
-            'module-lollilop-apiauth' => [
-                'rule' => 'lollilopapi/auth',
+            'module-ps_borest-apiauth' => [
+                'rule' => 'ps_borestapi/auth',
                 'keywords' => [],
                 'controller' => 'auth',
                 'params' => [
                     'fc' => 'module',
-                    'module' => 'lollilop'
+                    'module' => 'ps_borest'
                 ] 
             ],
-            'module-lollilop-apidashboard' => [
-                'rule' => 'lollilopapi/dashboard{/:module}',
+            'module-ps_borest-apidashboard' => [
+                'rule' => 'ps_borestapi/dashboard{/:module}',
                 'keywords' => [
                     'module' => array('regexp' => '[\w]+', 'param' => 'module'),
                 ],
                 'controller' => 'dashboard',
                 'params' => [
                     'fc' => 'module',
-                    'module' => 'lollilop'
+                    'module' => 'ps_borest'
                 ] 
             ],
-            'module-lollilop-apiresources' => [
-                'rule' => 'lollilopapi/resources{/:resource}{/:id_resource}',
+            'module-ps_borest-apiresources' => [
+                'rule' => 'ps_borestapi/resources{/:resource}{/:id_resource}',
                 'keywords' => [
                     'resource' => array('regexp' => '[\w]+', 'param' => 'resource'),
                     'id_resource' => array('regexp' => '[\w]+', 'param' => 'id_resource')
@@ -290,16 +290,16 @@ class Lollilop extends Module
                 'controller' => 'resources',
                 'params' => [
                     'fc' => 'module',
-                    'module' => 'lollilop'
+                    'module' => 'ps_borest'
                 ] 
             ],
-            'module-lollilop-apinotifications' => [
-                'rule' => 'lollilopapi/notifications',
+            'module-ps_borest-apinotifications' => [
+                'rule' => 'ps_borestapi/notifications',
                 'keywords' => [],
                 'controller' => 'notifications',
                 'params' => [
                     'fc' => 'module',
-                    'module' => 'lollilop'
+                    'module' => 'ps_borest'
                 ] 
             ]
         ];

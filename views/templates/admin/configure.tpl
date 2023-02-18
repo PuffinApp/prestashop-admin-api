@@ -29,8 +29,8 @@
 			<img src="{$module_dir|escape:'html':'UTF-8'}views/img/logo.jpg" />
 		</div>
 		<div class="col-xs-7 text-left">
-			<h2>{l s='Lorem' mod='lollilop'}</h2>
-			<h4>{l s='Lorem ipsum dolor' mod='lollilop'}</h4>
+			<h2>{l s='Lorem' mod='ps_borest'}</h2>
+			<h4>{l s='Lorem ipsum dolor' mod='ps_borest'}</h4>
 		</div>
 	</div>
 
@@ -40,13 +40,13 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<p>
-					<h4>{l s='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor' mod='lollilop'}</h4>
+					<h4>{l s='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor' mod='ps_borest'}</h4>
 					<ul class="ul-spaced">
-						<li><strong>{l s='Lorem ipsum dolor sit amet' mod='lollilop'}</strong></li>
-						<li>{l s='Lorem ipsum dolor sit amet' mod='lollilop'}</li>
-						<li>{l s='Lorem ipsum dolor sit amet' mod='lollilop'}</li>
-						<li>{l s='Lorem ipsum dolor sit amet' mod='lollilop'}</li>
-						<li>{l s='Lorem ipsum dolor sit amet' mod='lollilop'}</li>
+						<li><strong>{l s='Lorem ipsum dolor sit amet' mod='ps_borest'}</strong></li>
+						<li>{l s='Lorem ipsum dolor sit amet' mod='ps_borest'}</li>
+						<li>{l s='Lorem ipsum dolor sit amet' mod='ps_borest'}</li>
+						<li>{l s='Lorem ipsum dolor sit amet' mod='ps_borest'}</li>
+						<li>{l s='Lorem ipsum dolor sit amet' mod='ps_borest'}</li>
 					</ul>
 				</p>
 
@@ -55,7 +55,7 @@
 				<p class="text-center">
 					<strong>
 						<a href="http://www.prestashop.com" target="_blank" title="Lorem ipsum dolor">
-							{l s='Lorem ipsum dolor' mod='lollilop' }
+							{l s='Lorem ipsum dolor' mod='ps_borest' }
 						</a>
 					</strong>
 				</p>

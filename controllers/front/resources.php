@@ -2,9 +2,9 @@
 
 require dirname(__FILE__) . "/../../vendor/autoload.php";
 
-use Lollilop\Classes\Controller\RestController;
+use Ps_borest\Classes\Controller\RestController;
 
-class LollilopResourcesModuleFrontController extends RestController
+class Ps_borestResourcesModuleFrontController extends RestController
 {
     private $resource_controller = null;
 

@@ -2,9 +2,9 @@
 
 require dirname(__FILE__) . "/../../vendor/autoload.php";
 
-use Lollilop\Classes\Controller\RestController;
+use Ps_borest\Classes\Controller\RestController;
 
-class LollilopNotificationsModuleFrontController extends RestController
+class Ps_borestNotificationsModuleFrontController extends RestController
 {
     public function processGet() {
         $notification_obj = new \Notification();

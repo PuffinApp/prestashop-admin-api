@@ -1,6 +1,6 @@
 <?php
 
-require_once _PS_MODULE_DIR_ . "lollilop/packages/DynamicWidgetForFlutter/vendor/autoload.php";
+require_once _PS_MODULE_DIR_ . "ps_borest/packages/DynamicWidgetForFlutter/vendor/autoload.php";
 
 use agostinofiscale\DynamicWidgetForFlutter;
 use agostinofiscale\DynamicWidgetForFlutter\FontWeight;

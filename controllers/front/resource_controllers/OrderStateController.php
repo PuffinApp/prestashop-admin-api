@@ -1,6 +1,6 @@
 <?php
 
-use Lollilop\Classes\Controller\RestController;
+use Ps_borest\Classes\Controller\RestController;
 
 class OrderStateController extends RestController {
     public function processGet() {

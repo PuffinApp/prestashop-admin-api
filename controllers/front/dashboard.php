@@ -2,10 +2,10 @@
 
 require dirname(__FILE__) . "/../../vendor/autoload.php";
 
-use Lollilop\Classes\Controller\RestController;
+use Ps_borest\Classes\Controller\RestController;
 
 // TODO: rename it in something else?
-class LollilopDashboardModuleFrontController extends RestController
+class Ps_borestDashboardModuleFrontController extends RestController
 {
     public function processGet() {
         $module_name = Tools::getValue("module_name") ?? null;

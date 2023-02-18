@@ -1,6 +1,6 @@
 <?php
 
-use Lollilop\Classes\Controller\RestController;
+use Ps_borest\Classes\Controller\RestController;
 
 class OrderHistoryController extends RestController {
     public function processPost() {

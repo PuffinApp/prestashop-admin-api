@@ -1,14 +1,9 @@
 <?php
 
-use Lollilop\Classes\Controller\RestController;
-use Lollilop\Classes\Controller\AbstractControllerWrapper;
-use Limenius\Liform\Resolver;
-use Limenius\Liform\Liform;
-use Limenius\Liform\Liform\Transformer;
+use Ps_borest\Classes\Controller\RestController;
 use PrestaShopBundle\Model\Product\AdminModelAdapter;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use PrestaShopBundle\Form\Admin\Product\ProductCategories;
 use PrestaShopBundle\Form\Admin\Product\ProductCombination;
 use PrestaShopBundle\Form\Admin\Product\ProductCombinationBulk;
 use PrestaShopBundle\Form\Admin\Product\ProductInformation;
@@ -18,8 +13,8 @@ use PrestaShopBundle\Form\Admin\Product\ProductQuantity;
 use PrestaShopBundle\Form\Admin\Product\ProductSeo;
 use PrestaShopBundle\Form\Admin\Product\ProductShipping;
 use Symfony\Component\HttpFoundation\Request;
-use PrestaShopBundle\Service\Hook\HookFinder;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Form\FormInterface;
 
 class ProductController extends RestController {
 
@@ -92,7 +87,7 @@ class ProductController extends RestController {
 
         $response_json = json_encode($response);
 
-        $this->ajaxDie($response_json);
+        $this->return200($response_json);
     }
 
     /**
@@ -106,17 +101,22 @@ class ProductController extends RestController {
         $jsonPostData = $this->getJsonBody();
 
         if (!array_key_exists("id_product", $jsonPostData)) {
-            $product = $this->createTemporanyProduct();
-
-
-            $product_for_view = new Product($product->id, true);
-            $product_for_view->images_url = [];
-
-            $response_json = json_encode($product_for_view);
-            
-            $this->ajaxDie($response_json);
+            $this->processPostForTemporanyProduct();
+        } else {
+            $this->processPostForExistingProduct($jsonPostData);
         }
+    }
 
+    public function processPostForTemporanyProduct() {
+        $product = $this->createTemporanyProduct();
+
+        // TODO: This is only a workaround
+        $_GET["id_resource"] = $product->id;
+
+        $this->processGet();
+    }
+
+    public function processPostForExistingProduct($jsonPostData) {
         // Check if current shop is all context
         $productAdapter = $this->get('prestashop.adapter.data_provider.product');
 
@@ -194,9 +194,8 @@ class ProductController extends RestController {
                     $productSaveResult = $adminProductController->postCoreProcess();
 
                     if (false == $productSaveResult) {
-                        return $this->returnErrorJsonResponse(
-                            ['error' => $adminProductController->errors],
-                            Response::HTTP_BAD_REQUEST
+                        return $this->return400(
+                            $adminProductController->errors
                         );
                     }
 
@@ -244,19 +243,16 @@ class ProductController extends RestController {
                         return $response;
                     }
                 } elseif ($request->isXmlHttpRequest()) {
+                    var_dump("sei gay"); die();
+
                     return $this->returnErrorJsonResponse(
                         $this->getFormErrorsForJS($form),
                         Response::HTTP_BAD_REQUEST
                     );
                 } else {
-                    $errors = array();
-                    foreach ($form as $fieldName => $formField) {
-                        foreach ($formField->getErrors(true) as $error) {
-                            $errors[$fieldName] = $error->getMessage();
-                        }
-                    }
-                    
-                    var_dump($errors); die();
+                    $this->return400(
+                        $this->getFormErrorsForJS($form)
+                    );
                 }
             }
         } catch (Exception $e) {
@@ -272,9 +268,9 @@ class ProductController extends RestController {
             throw $e;
         }
 
-        $response_json = json_encode($product);
-
-        $this->ajaxDie($response_json);
+        $_GET["id_resource"] = $product->id;
+        
+        $this->processGet();
     }
 
     private function createTemporanyProduct() {
@@ -380,4 +376,56 @@ class ProductController extends RestController {
 
         return $result;
     }
+
+    /**
+     * Returns form errors for JS implementation.
+     *
+     * Parse all errors mapped by id html field
+     *
+     * @param FormInterface $form
+     *
+     * @return array<array<string>> Errors
+     *
+     * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
+     */
+    public function getFormErrorsForJS(FormInterface $form)
+    {
+        $errors = [];
+
+        if ($form->count() === 0) {
+            return $errors;
+        }
+
+        $translator = $this->get('translator');
+
+        foreach ($form->getErrors(true) as $error) {
+            if (!$error->getCause()) {
+                $formId = 'bubbling_errors';
+            } else {
+                $formId = str_replace(
+                    ['.', 'children[', ']', '_data'],
+                    ['_', '', '', ''],
+                    $error->getCause()->getPropertyPath()
+                );
+            }
+
+            if ($error->getMessagePluralization()) {
+                $errors[$formId][] = $translator->transChoice(
+                    $error->getMessageTemplate(),
+                    $error->getMessagePluralization(),
+                    $error->getMessageParameters(),
+                    'form_error'
+                );
+            } else {
+                $errors[$formId][] = $translator->trans(
+                    $error->getMessageTemplate(),
+                    $error->getMessageParameters(),
+                    'form_error'
+                );
+            }
+        }
+
+        return $errors;
+    }
+
 }

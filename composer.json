@@ -1,10 +1,10 @@
 {
-    "name": "agostinofiscale/lollilop",
-    "description": "Lollilop API for application",
+    "name": "agostinofiscale/ps_borest",
+    "description": "Ps_borest API for application",
     "type": "prestashop-module",
     "autoload": {
         "psr-4": {
-            "Lollilop\\": "src/",
+            "Ps_borest\\": "src/",
             "MyModule\\Controller\\": "src/Controller/"
         }
     },

@@ -2,11 +2,11 @@
 
 require dirname(__FILE__) . "/../../vendor/autoload.php";
 
-use Lollilop\Classes\Controller\RestController;
+use Ps_borest\Classes\Controller\RestController;
 
-class LollilopAuthModuleFrontController extends RestController
+class Ps_borestAuthModuleFrontController extends RestController
 {
     public function processGet() {
-        
+        return true;
     } 
 }
