@@ -22,7 +22,11 @@ class Ps_borestResourcesModuleFrontController extends RestController
 
             $this->resource_controller = new $resource_controller_name();
         } else {
-            $this->error("", 404, "Resource not found");
+            $this->error(
+                "", 
+                404, 
+                "Resource not found."
+            );
         }
         
         parent::run();

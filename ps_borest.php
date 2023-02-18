@@ -40,7 +40,6 @@ class Ps_borest extends Module
         $this->author = 'Agostino Fiscale';
         $this->need_instance = 0;
         
-
         /**
          * Set $this->bootstrap to true if your module is compliant with bootstrap (PrestaShop 1.6)
          */
@@ -297,6 +296,15 @@ class Ps_borest extends Module
                 'rule' => 'ps_borestapi/notifications',
                 'keywords' => [],
                 'controller' => 'notifications',
+                'params' => [
+                    'fc' => 'module',
+                    'module' => 'ps_borest'
+                ] 
+            ],
+            'module-ps_borest-apisettings' => [
+                'rule' => 'ps_borestapi/settings',
+                'keywords' => [],
+                'controller' => 'settings',
                 'params' => [
                     'fc' => 'module',
                     'module' => 'ps_borest'

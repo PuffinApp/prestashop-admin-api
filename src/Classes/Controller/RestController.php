@@ -164,16 +164,18 @@ abstract class RestController extends \ModuleFrontController
         return $this->kernel->getContainer()->get($service);
     }
 
-    public function getJsonBody()
+    protected function getJsonBody()
     {
         $request_body = file_get_contents('php://input');
-
-        // Check if json is correct and return some error if it isn't.
 
         $json = json_decode($request_body, true);
 
         if (!empty($request_body) && is_null($json)) {
-            $this->return400();
+            $this->error(
+                "",
+                400,
+                "Request body isn't a JSON."
+            );
         }
 
         return $json;

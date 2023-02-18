@@ -31,12 +31,16 @@ class Ps_borestDashboardModuleFrontController extends RestController
             $modules_widgets
         );
 
-        die(
-            json_encode(
-                array_values($widgets),
-                0,
-                1
-            )
+        $response = json_encode(
+            array_values($widgets),
+            0,
+            1
+        );
+
+        $this->success(
+            "OK",
+            200,
+            $response
         );
     }
 
