@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <module>
-    <name>ps_borest</name>
-    <displayName><![CDATA[Ps_borest]]></displayName>
+    <name>ps_adminapi</name>
+    <displayName><![CDATA[Ps_adminapi]]></displayName>
     <version><![CDATA[1.0.0]]></version>
-    <description><![CDATA[Ps_borest let you manage your shop from your phone]]></description>
-    <author><![CDATA[Agostino Fiscale]]></author>
+    <description><![CDATA[Ps_adminapi let you manage your shop from your phone]]></description>
+    <author><![CDATA[Und3fined]]></author>
     <tab><![CDATA[others]]></tab>
     <is_configurable>1</is_configurable>
     <need_instance>0</need_instance>

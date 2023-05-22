@@ -1,6 +1,6 @@
 <?php
 
-require_once _PS_MODULE_DIR_ . "ps_borest/packages/DynamicWidgetForFlutter/vendor/autoload.php";
+require_once _PS_MODULE_DIR_ . "ps_adminapi/packages/DynamicWidgetForFlutter/vendor/autoload.php";
 
 use agostinofiscale\DynamicWidgetForFlutter;
 use agostinofiscale\DynamicWidgetForFlutter\FontWeight;
@@ -24,15 +24,15 @@ class dashproductsOverride extends dashproducts
         $top_10_most_search_tiles = $this->getTilesTop10MostSearch($date_from, $date_to);
 
         $ps_widget = new DynamicWidgetForFlutter\PsWidget(
-            (new DynamicWidgetForFlutter\Text("Prodotti e vendite"))->setStyle(
+            (new DynamicWidgetForFlutter\Text($this->trans("Products and Sales", array(), 'Modules.Dashproducts.Admin')))->setStyle(
                 (new TextStyle())->setFontWeight(FontWeight::w700)
             ),
             null,
             [
-                new DynamicWidgetForFlutter\Tab("Ordini recenti"),
-                new DynamicWidgetForFlutter\Tab('Migliori vendite'),
-                new DynamicWidgetForFlutter\Tab('Piu\' visualizzati'),
-                new DynamicWidgetForFlutter\Tab('Piu\' ricercati')
+                new DynamicWidgetForFlutter\Tab($this->trans("Recent Orders", array(), 'Modules.Dashproducts.Admin')),
+                new DynamicWidgetForFlutter\Tab($this->trans("Best Sellers", array(), 'Modules.Dashproducts.Admin')),
+                new DynamicWidgetForFlutter\Tab($this->trans("Most Viewed", array(), 'Modules.Dashproducts.Admin')),
+                new DynamicWidgetForFlutter\Tab($this->trans("Top Searches", array(), 'Modules.Dashproducts.Admin')),
             ],
             [
                 (new DynamicWidgetForFlutter\ListView())->setChildren($orders_list_tiles)->setShrinkWrap(true),

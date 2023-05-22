@@ -2,21 +2,27 @@
 
 require dirname(__FILE__) . "/../../vendor/autoload.php";
 
-use Ps_borest\Classes\Controller\RestController;
+use Und3fined\Module\AdminApi\Classes\Controller\RestController;
 
-class Ps_borestResourcesModuleFrontController extends RestController
+use Doctrine\Inflector\InflectorFactory;
+
+class Ps_adminapiResourcesModuleFrontController extends RestController
 {
     private $resource_controller = null;
 
     public function run() {
-        $resource_controllers = Dispatcher::getControllersInDirectory(dirname(__FILE__) . "/resource_controllers/");
+        $resource_controllers = Dispatcher::getControllersInDirectory(dirname(__FILE__));
 
         $resource_name = $_GET["resource"];
 		$resource_name_lower = strtolower($resource_name);
 
-        if (array_key_exists($resource_name_lower, $resource_controllers)) {
-					$resource_controller_name = $resource_controllers[$resource_name_lower];
-			        $resource_controller_file = dirname(__FILE__) . "/resource_controllers/" . $resource_controller_name . ".php";
+        // Singularize the resource name
+        $inflector = InflectorFactory::create()->build();
+        $resource_name_singular = $inflector->singularize($resource_name_lower);
+
+        if (array_key_exists($resource_name_singular, $resource_controllers)) {
+					$resource_controller_name = $resource_controllers[$resource_name_singular];
+			        $resource_controller_file = dirname(__FILE__) . '/' . $resource_controller_name . ".php";
 
             require_once $resource_controller_file;
 

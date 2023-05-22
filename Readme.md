@@ -96,14 +96,14 @@ See `contributing.md` for ways to get started.
 
 Please adhere to this project's `code of conduct`.
 
-If you find any issues please report it [here](https://github.com/agostinofiscale/prestashop-bo-rest/issues).
+If you find any issues please report it [here](https://github.com/und3fined/prestashop-bo-rest/issues).
 
 ## Note
 
-These APIs are developed for [Presta](https://github.com/agostinofiscale/presta), of course I want to make this as agnostic as possible but there will be some utilities for developers like [Dynamic Widget For Flutter](https://github.com/agostinofiscale/dynamic-widget-for-flutter) that for someone else are useless.
+These APIs are developed for [Presta](https://github.com/und3fined/presta), of course I want to make this as agnostic as possible but there will be some utilities for developers like [Dynamic Widget For Flutter](https://github.com/und3fined/dynamic-widget-for-flutter) that for someone else are useless.
 
 ## Useful links
 
-- [Presta](https://github.com/agostinofiscale/presta)
-- [Dynamic Widget For Flutter](https://github.com/agostinofiscale/dynamic-widget-for-flutter)
+- [Presta](https://github.com/und3fined/presta)
+- [Dynamic Widget For Flutter](https://github.com/und3fined/dynamic-widget-for-flutter)
 - [Dynamic Widget ](https://github.com/dengyin2000/dynamic_widget)

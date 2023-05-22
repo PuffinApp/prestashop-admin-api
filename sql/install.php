@@ -25,10 +25,24 @@
 */
 $sql = array();
 
-$sql[] = 'CREATE TABLE IF NOT EXISTS `' . _DB_PREFIX_ . 'ps_borest` (
-    `id_ps_borest` int(11) NOT NULL AUTO_INCREMENT,
-    PRIMARY KEY  (`id_ps_borest`)
-) ENGINE=' . _MYSQL_ENGINE_ . ' DEFAULT CHARSET=utf8;';
+$sql[] = 'CREATE TABLE IF NOT EXISTS `' . _DB_PREFIX_ . 'ps_adminapi_key` (
+    id_key int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `key` varchar(32) NOT NULL,
+    description text DEFAULT NULL,
+    active tinyint(2) NOT NULL
+  ) ENGINE=' . _MYSQL_ENGINE_ . ' DEFAULT CHARSET=utf8;';
+
+  $sql[] = 'CREATE TABLE IF NOT EXISTS `' . _DB_PREFIX_ . 'ps_adminapi_key_shop` (
+    id_key int(11) UNSIGNED NOT NULL,
+    id_shop int(11) UNSIGNED NOT NULL
+  ) ENGINE=' . _MYSQL_ENGINE_ . ' DEFAULT CHARSET=utf8;';
+
+  $sql[] = 'CREATE TABLE IF NOT EXISTS `' . _DB_PREFIX_ . 'ps_adminapi_key_permission` (
+    id_key_permission int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    resource varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+    method enum("GET", "POST", "PUT", "DELETE", "HEAD") CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+    id_key int(11) NOT NULL
+  ) ENGINE=' . _MYSQL_ENGINE_ . ' DEFAULT CHARSET=utf8;';
 
 foreach ($sql as $query) {
     if (Db::getInstance()->execute($query) == false) {

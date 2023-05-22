@@ -6,6 +6,6 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Ps_borest\\' => array($baseDir . '/src'),
-    'MyModule\\Controller\\' => array($baseDir . '/src/Controller'),
+    'Und3fined\\Module\\AdminApi\\' => array($baseDir . '/src'),
+    'Doctrine\\Inflector\\' => array($vendorDir . '/doctrine/inflector/lib/Doctrine/Inflector'),
 );

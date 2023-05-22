@@ -1,21 +1,22 @@
 {
-    "name": "agostinofiscale/ps_borest",
-    "description": "Ps_borest API for application",
+    "name": "und3fined/ps_adminapi",
+    "description": "Ps_adminapi API for application",
     "type": "prestashop-module",
     "autoload": {
         "psr-4": {
-            "Ps_borest\\": "src/",
-            "MyModule\\Controller\\": "src/Controller/"
+            "Und3fined\\Module\\AdminApi\\": "src/"
         }
     },
     "authors": [
         {
-            "name": "Agostino Fiscale",
-            "email": "agostinofiscale@gmail.com"
+            "name": "Und3fined",
+            "email": "und3fined@gmail.com"
         }
     ],
     "config": {
         "prepend-autoloader": false
     },
-    "require": {}
+    "require": {
+        "doctrine/inflector": "^2.0"
+    }
 }
