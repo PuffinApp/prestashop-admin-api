@@ -86,7 +86,7 @@ class Request {
         ];
 
         $extra_resources = Hook::exec(
-            'addAdminApiResources', 
+            'actionAdminApiResources', 
             ['resources' => $resources], 
             null, 
             true, 

@@ -11,7 +11,26 @@ class Ps_adminapiResourcesModuleFrontController extends RestController
     private $resource_controller = null;
 
     public function run() {
-        $resource_controllers = Dispatcher::getControllersInDirectory(dirname(__FILE__));
+        $resource_controllers = [];
+        
+        $controllers = Dispatcher::getControllersInDirectory(dirname(__FILE__));
+
+        foreach ($controllers as $controller => $filename) {
+            if ($controller === "resources") {
+                continue;
+            }
+
+            $path = dirname(__FILE__) . '/' . $filename . ".php";
+
+            $resource_controllers[$controller] = $path;
+        }
+
+        Hook::exec(
+            "actionAdminApiResourcesControllers",
+            array(
+                "resource_controllers" => &$resource_controllers
+            )
+        );
 
         $resource_name = $_GET["resource"];
 		$resource_name_lower = strtolower($resource_name);
@@ -21,8 +40,8 @@ class Ps_adminapiResourcesModuleFrontController extends RestController
         $resource_name_singular = $inflector->singularize($resource_name_lower);
 
         if (array_key_exists($resource_name_singular, $resource_controllers)) {
-					$resource_controller_name = $resource_controllers[$resource_name_singular];
-			        $resource_controller_file = dirname(__FILE__) . '/' . $resource_controller_name . ".php";
+			$resource_controller_file = $resource_controllers[$resource_name_singular];
+            $resource_controller_name = ucfirst($resource_name_singular) . "Controller";
 
             require_once $resource_controller_file;
 
